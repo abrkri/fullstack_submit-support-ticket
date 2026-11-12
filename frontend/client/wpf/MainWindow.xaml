@@ -1,0 +1,28 @@
+<Window x:Class="MyApp.Client.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hibabejelentés" Height="450" Width="600" MinHeight="350" MinWidth="440">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24">
+            <TextBlock Text="Hiba bejelentése" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,20"/>
+            <TextBlock Text="Írd le röviden a tapasztalt hibát!" Margin="0,0,0,8"/>
+            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" MaxLength="1000"
+                     Height="80" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+            <TextBlock Text="Add meg a helyszínt!" Margin="0,0,0,8"/>
+            <TextBox Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" MaxLength="100"
+         Height="30" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+            <TextBlock Text="Add meg a határidőt!" Margin="0,0,0,8"/>
+            <DatePicker SelectedDate="{Binding DueDate, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,8" Text="Add meg a határidőt!"/>
+            <TextBlock Text="Add meg a az érintett eszközök számát!" Margin="0,0,0,8"/>
+            <TextBox Text="{Binding AffectedDeviceCount, UpdateSourceTrigger=PropertyChanged}"  MaxLength="100"
+Height="30" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+            <Button Content="Hiba beküldése" Command="{Binding SubmitReportCommand}" HorizontalAlignment="Left" Padding="14,7" Margin="0,14,0,0"/>
+            <TextBlock Text="{Binding StatusMessage}" TextWrapping="Wrap" Margin="0,18,0,0">
+                <TextBlock.Style><Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="#344054"/>
+                    <Style.Triggers><DataTrigger Binding="{Binding HasError}" Value="True"><Setter Property="Foreground" Value="#B42318"/></DataTrigger></Style.Triggers>
+                </Style></TextBlock.Style>
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

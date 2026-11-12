@@ -1,0 +1,7 @@
+<Project>
+  <!-- Rövid, projektenként eltérő obj útvonal a Windows MAX_PATH hibák ellen. -->
+  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+    <BaseIntermediateOutputPath>$(TEMP)\tc\fs01-net10-$([MSBuild]::StableStringHash('$(MSBuildProjectDirectory)'))\obj\</BaseIntermediateOutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj\**;bin\**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

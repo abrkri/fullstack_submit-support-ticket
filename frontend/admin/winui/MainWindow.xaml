@@ -1,0 +1,18 @@
+<Window x:Class="MyApp.Admin.WinUI.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Hibabejelentés">
+    <Grid x:Name="Root" Padding="24" RowSpacing="16">
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <TextBlock Text="Hibabejelentések" FontSize="26" FontWeight="SemiBold"/>
+        <Button Grid.Row="1" Content="Lista frissítése" Command="{Binding LoadReportsCommand}"/>
+        <ListView Grid.Row="2" ItemsSource="{Binding Reports}" SelectionMode="None" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate><DataTemplate>
+                <StackPanel Spacing="8" Padding="0,10">
+                    <TextBlock Text="{Binding Id}"/>
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding IsClosed, Converter={StaticResource ReportState}}"/>
+                    <Button Content="Lezárás" Command="{Binding CloseReportCommand, Source={StaticResource AdminViewModel}}" CommandParameter="{Binding}" Visibility="{Binding IsClosed, Converter={StaticResource OpenReportVisibility}}"/>
+                </StackPanel>
+            </DataTemplate></ListView.ItemTemplate>
+        </ListView>
+        <TextBlock Grid.Row="3" Text="{Binding StatusMessage}" TextWrapping="Wrap" Foreground="{Binding HasError, Converter={StaticResource ErrorBrush}}"/>
+    </Grid>
+</Window>

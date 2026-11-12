@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyApp.Client.Maui.MainPage" Title="Hibabejelentés" BackgroundColor="White">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+            <Label Text="Hiba bejelentése" FontSize="26" FontAttributes="Bold" TextColor="#172B4D"/>
+            <Label Text="Írd le röviden a tapasztalt hibát!" TextColor="#344054"/>
+            <Editor Text="{Binding Description}" Placeholder="Pl. Nem működik a nyomtató."
+                    MaxLength="1000" HeightRequest="140" BackgroundColor="#F1F5F9"
+                    TextColor="#172B4D" PlaceholderColor="#64748B" FontSize="16"/>
+            <Button Text="Hiba beküldése" Command="{Binding SubmitReportCommand}"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="#176B5B"/>
+            <Label Text="{Binding StatusMessage}" TextColor="#344054" LineBreakMode="WordWrap">
+                <Label.Triggers><DataTrigger TargetType="Label" Binding="{Binding HasError}" Value="True"><Setter Property="TextColor" Value="#B42318"/></DataTrigger></Label.Triggers>
+            </Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
