@@ -12,6 +12,7 @@ public class ReportService(AppDbContext dbContext) : IReportService
         var location = request.Location?.Trim() ?? string.Empty;
         var duedate = request.DueDate;
         var affectedDeviceCount = request.AffectedDeviceCount;
+        var category = request.Category;
         if (description.Length == 0)
             return Result<ReportResponse>.Failure("description_required", "A hiba leírása kötelező.");
         if (description.Length > 1000)
@@ -24,7 +25,16 @@ public class ReportService(AppDbContext dbContext) : IReportService
             return Result<ReportResponse>.Failure("duedate_invalid", "A határidő nem lehet a jelenlegi dátumnál korábbi.");
         if (affectedDeviceCount < 1 || affectedDeviceCount > 999)
             return Result<ReportResponse>.Failure("affecteddevicecount_invalid", "Az érintett eszközök száma nem haladhatja meg az 1000-et és nem lehet 1-nél kevesebb");
-        var report = new Report { Description = description, IsClosed = false, Location = location, DueDate = duedate, AffectedDeviceCount = affectedDeviceCount };
+        if (category is null)
+            return Result<ReportResponse>.Failure("category_required", "A kategória megadása kötelező.");
+        var report = new Report {
+            Description = description,
+            IsClosed = false,
+            Location = location,
+            DueDate = duedate,
+            AffectedDeviceCount = affectedDeviceCount,
+            Category = category
+        };
         dbContext.Reports.Add(report);
         await dbContext.SaveChangesAsync();
         return Result<ReportResponse>.Success(ToResponse(report));
@@ -51,6 +61,7 @@ public class ReportService(AppDbContext dbContext) : IReportService
         IsClosed = report.IsClosed,
         Location = report.Location,
         DueDate = report.DueDate,
-        AffectedDeviceCount = report.AffectedDeviceCount
+        AffectedDeviceCount = report.AffectedDeviceCount,
+        Category = report.Category
     };
 }

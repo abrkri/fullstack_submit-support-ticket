@@ -1,3 +1,5 @@
+using MyApp.Shared.Models;
+
 namespace MyApp.WebApi.Models;
 public class Report
 {
@@ -7,5 +9,7 @@ public class Report
     public string Location { get; set; } = string.Empty;
     public DateTime DueDate { get; set; } = DateTime.Now.AddDays(1);
     public int AffectedDeviceCount { get; set; } = 0;
+    public ReportCategories Category { get; set; } = new ReportCategories();
+
 
 }

@@ -7,4 +7,5 @@ public class CreateReportRequest
     public string Location { get; set; } = string.Empty;
     public DateTime DueDate { get; set; } = DateTime.Now.AddDays(1);
     public int AffectedDeviceCount { get; set; } = 0;
+    public ReportCategories Category { get; set; } = new ReportCategories();
 }

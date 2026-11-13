@@ -16,6 +16,12 @@
             <TextBlock Text="Add meg a az érintett eszközök számát!" Margin="0,0,0,8"/>
             <TextBox Text="{Binding AffectedDeviceCount, UpdateSourceTrigger=PropertyChanged}"  MaxLength="100"
 Height="30" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+            <TextBlock Text="Add meg a kategóriát!" Margin="0,0,0,8"/>
+            <ComboBox
+    ItemsSource="{Binding Categories}"
+    SelectedItem="{Binding Category, Mode=TwoWay}"
+    IsEditable="False"
+    Margin="0,0,0,8"/>
             <Button Content="Hiba beküldése" Command="{Binding SubmitReportCommand}" HorizontalAlignment="Left" Padding="14,7" Margin="0,14,0,0"/>
             <TextBlock Text="{Binding StatusMessage}" TextWrapping="Wrap" Margin="0,18,0,0">
                 <TextBlock.Style><Style TargetType="TextBlock">
